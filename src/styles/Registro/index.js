@@ -15,7 +15,7 @@ export default StyleSheet.create({
     width: "100%",
   },
   SecondSection:{
-    flex: 2,
+    flex: 3,
     //backgroundColor: "green",
     width:"100%",
     padding: 20,

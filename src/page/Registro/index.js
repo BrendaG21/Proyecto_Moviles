@@ -1,5 +1,8 @@
 import styles from "../../styles/Registro"
-import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity} from "react-native";
+import React, { useState, useEffect } from 'react';
+import { Button, Image, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { SafeAreaView, Text, TextInput, TouchableOpacity} from "react-native";
 
 export default function Registro(props){
   const {navigation} = props;
@@ -7,6 +10,24 @@ export default function Registro(props){
   const goToLogin = () => {
     navigation.navigate("Login");
   }
+//Empieza lo de  camara
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   return(
     <SafeAreaView style={styles.container}>
@@ -77,6 +98,11 @@ export default function Registro(props){
               <TouchableOpacity onPress={goToLogin}>
                 <Text style={styles.signup}>Log in</Text>
               </TouchableOpacity>
+            </View>
+
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              {image && <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />}
+              <Button title="Seleccionar imagen" onPress={pickImage} color='pink'  />
             </View>
 
       </View>

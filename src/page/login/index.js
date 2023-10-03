@@ -1,6 +1,5 @@
 import styles from "../../styles/login"
-
-import { StyleSheet, SafeAreaView, View, Image , Text, TextInput, TouchableOpacity} from "react-native";
+import {  SafeAreaView, View, Image , Text, TextInput, TouchableOpacity} from "react-native";
 
 export default function Login(props){
 
